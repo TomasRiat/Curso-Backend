@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Camiseta",
+    "description": "Camiseta de algodón",
+    "price": 20.99,
+    "thumbnail": "camiseta.jpg",
+    "code": "001",
+    "stock": 80
+  },
+  {
+    "id": 3,
+    "title": "Campera",
+    "description": "Campera de abrigo",
+    "price": 20000,
+    "thumbnail": "campera.jpg",
+    "code": 3362,
+    "stock": 100
+  },
+  {
+    "id": 4,
+    "title": "Zapatillas",
+    "description": "Zapatillas deportivas",
+    "price": 50000,
+    "thumbnail": "zapatillas.jpg",
+    "code": 2032,
+    "stock": 30
+  }
+]
