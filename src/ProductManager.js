@@ -43,12 +43,12 @@ class ProductManager {
       !productData.code ||
       !productData.stock
     ) {
-      console.error("Todos los campos son obligatorios.");
+      console.error("Todos los campos son obligatorios");
       return;
     }
 
     if (this.products.some((product) => product.code === productData.code)) {
-      console.error("Ya existe un producto con ese código.");
+      console.error("Ya existe un producto con ese codigo");
       return;
     }
 
@@ -89,7 +89,6 @@ class ProductManager {
   }
 }
 
-// Ejemplo de uso
 const productManager = new ProductManager("./src/product.json");
 
 productManager.addProduct({
