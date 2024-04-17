@@ -25,5 +25,14 @@
     "thumbnail": "zapatillas.jpg",
     "code": 2032,
     "stock": 30
+  },
+  {
+    "id": 5,
+    "title": "Remera",
+    "description": "Remera de algodon",
+    "price": 3000,
+    "thumbnail": "remera.jpg",
+    "code": 5521,
+    "stock": 200
   }
 ]
