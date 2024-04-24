@@ -1,15 +1,36 @@
+import fs from "fs";
+
 class CartManager {
   constructor() {
     this.carts = [];
-    this.nextId = 1;
+    this.filePath = "carrito.json";
+    this.loadCarts();
+  }
+
+  loadCarts() {
+    try {
+      const data = fs.readFileSync(this.filePath, "utf8");
+      this.carts = JSON.parse(data);
+    } catch (error) {
+      this.carts = [];
+    }
+  }
+
+  saveCarts() {
+    fs.writeFileSync(
+      this.filePath,
+      JSON.stringify(this.carts, null, 2),
+      "utf8"
+    );
   }
 
   createCart() {
     const newCart = {
-      id: this.nextId++,
+      id: this.carts.length + 1,
       products: [],
     };
     this.carts.push(newCart);
+    this.saveCarts();
     return newCart;
   }
 
@@ -20,8 +41,7 @@ class CartManager {
   addProductToCart(cartId, productId, quantity = 1) {
     const cart = this.getCartById(cartId);
     if (!cart) {
-      console.error("Cart not found");
-      return;
+      throw new Error("Cart not found");
     }
 
     const existingProduct = cart.products.find(
@@ -33,10 +53,9 @@ class CartManager {
       cart.products.push({ id: productId, quantity });
     }
 
+    this.saveCarts();
     return cart;
   }
 }
-
-const cartManager = new CartManager();
 
 export default CartManager;

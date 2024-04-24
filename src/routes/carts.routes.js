@@ -24,14 +24,12 @@ router.post("/:cid/product/:pid", (req, res) => {
   const productId = parseInt(req.params.pid);
   const quantity = parseInt(req.body.quantity) || 1;
 
-  const cart = cartManager.getCartById(cartId);
-  if (!cart) {
-    res.status(404).json({ message: "Cart not found" });
-    return;
+  try {
+    const cart = cartManager.addProductToCart(cartId, productId, quantity);
+    res.json(cart);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
-
-  cartManager.addProductToCart(cartId, productId, quantity);
-  res.json(cart);
 });
 
 export default router;

@@ -89,33 +89,4 @@ class ProductManager {
   }
 }
 
-// const productManager = new ProductManager("./src/product.json");
-
-// productManager.addProduct({
-//   title: "Remera",
-//   description: "Remera de algodon",
-//   price: 3000,
-//   thumbnail: "remera.jpg",
-//   code: 5521,
-//   stock: 200,
-// });
-
-// productManager.addProduct({
-//   title: "Campera",
-//   description: "Campera de abrigo",
-//   price: 20000,
-//   thumbnail: "campera.jpg",
-//   code: 3362,
-//   stock: 100,
-// });
-
-// productManager.addProduct({
-//   title: "Zapatillas",
-//   description: "Zapatillas deportivas",
-//   price: 50000,
-//   thumbnail: "zapatillas.jpg",
-//   code: 2032,
-//   stock: 30,
-// });
-
 export default ProductManager;
