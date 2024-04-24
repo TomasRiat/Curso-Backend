@@ -60,8 +60,8 @@ class ProductManager {
     this.saveProductsToFile();
   }
 
-  getProducts() {
-    return this.products;
+  getProducts(limit) {
+    return limit ? this.products.slice(0, limit) : this.products;
   }
 
   getProductById(id) {
