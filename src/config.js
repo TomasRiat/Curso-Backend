@@ -1,8 +1,8 @@
-import * as url from url;
+import url from "url";
 
 const config = {
-    PORT: 8080, 
-    DIRNAME: url.fileURLToPath(new URL('.', import.meta.url)),
-}
+  PORT: 8080,
+  DIRNAME: url.fileURLToPath(new URL(".", import.meta.url)),
+};
 
-export default config; 
+export default config;

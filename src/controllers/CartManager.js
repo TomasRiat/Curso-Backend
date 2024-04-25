@@ -3,7 +3,7 @@ import fs from "fs";
 class CartManager {
   constructor() {
     this.carts = [];
-    this.filePath = "carrito.json";
+    this.filePath = "cart.json";
     this.loadCarts();
   }
 
