@@ -1,0 +1,81 @@
+<div>
+    <h1>Listado de productos</h1>
+
+    <ul id="productsList" class="list-group">
+    {{#each products}}
+        <li class="list-group-item">
+        {{title}} ($ {{price}}) {{description}} {{code}} {{stock}} {{thumbnail}}
+        <button class="btn btn-danger delete-product" data-id="{{id}}">Eliminar</button>
+        </li>
+    {{/each}}
+    </ul>
+
+</div>
+
+<div class="mt-3">
+    <h3>Nuevo producto</h3>
+
+    <form id="productForm">
+        <label for="title">Nombre</label>
+        <input class="form-control" type="text" id="title" name="title" placeholder="Nombre" style="width: 300px;"><br />
+        <label for="price">Precio</label>
+        <input class="form-control" type="number" id="price" name="price" style="width: 100px;"><br />
+        <label for="description">Descripcion</label>
+        <input class="form-control" type="text" id="description" name="description" placeholder="descripcion" style="width: 300px;"><br />
+        <label for="stock">Stock</label>
+        <input class="form-control" type="number" id="stock" name="stock" placeholder="stock" style="width: 100px;"><br />
+        <label for="code">Codigo</label>
+        <input class="form-control" type="number" id="code" name="code" placeholder="codigo" style="width: 100px;"><br />
+        <label for="thumbnail">Imagen</label>
+        <input class="form-control" type="text" id="thumbnail" name="thumbnail" placeholder="Imagen" style="width: 300px;"><br />
+
+        <button type="submit" class="btn btn-success">Cargar</button>
+    </form>
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+<script>    
+    const serverAddress = 'ws://localhost:3000';
+    const socketClient = io(serverAddress);
+    const productsList = document.getElementById('productsList');
+    const productForm = document.getElementById('productForm');
+
+    socketClient.on('newProduct', data => {
+        const li = document.createElement('li');
+        li.textContent = `${data.title} ($ ${data.price}) ${data.description} ${data.code} ${data.stock} ${data.thumbnail}`;
+        li.classList.add('list-group-item');
+        productsList.appendChild(li);
+    });
+
+    // Activamos un listener para el submit del formulario,
+    // a efectos de enviar la solicitud POST con un fetch
+    // y evitar la recarga automática de la página
+    productForm.addEventListener('submit', async (evt) => {
+        evt.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const price = document.getElementById('price').value;
+        const description = document.getElementById('description').value;
+        const code = document.getElementById('code').value;
+        const stock = document.getElementById('stock').value;
+        const thumbnail = document.getElementById('thumbnail').value;
+
+        const process = await fetch('/api/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, price, description, code, stock, thumbnail })
+        });
+    });
+
+    productsList.addEventListener('click', async (evt) => {
+  if (evt.target.classList.contains('delete-product')) {
+    const productId = evt.target.dataset.id;
+    const response = await fetch(`/api/products/${productId}`, {
+      method: 'DELETE'
+    });
+    if (response.ok) {
+      evt.target.parentElement.remove(); // Eliminar el elemento de la lista en la interfaz
+    }
+  }
+});
+</script>

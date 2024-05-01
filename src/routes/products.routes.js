@@ -1,8 +1,9 @@
 import { Router } from "express";
 import ProductManager from "../controllers/ProductManager.js";
+import config from "../config.js";
 
 const router = Router();
-const productManager = new ProductManager();
+const productManager = new ProductManager(`${config.DIRNAME}/product.json`);
 
 router.get("/", (req, res) => {
   const limit = parseInt(req.query.limit);
@@ -22,14 +23,7 @@ router.get("/:pid", (req, res) => {
 
 router.post("/", (req, res) => {
   const { title, description, price, thumbnail, code, stock } = req.body;
-  const newProduct = productManager.addProduct(
-    title,
-    description,
-    price,
-    thumbnail,
-    code,
-    stock
-  );
+  const newProduct = productManager.addProduct(req.body);
   res.status(201).json(newProduct);
 });
 

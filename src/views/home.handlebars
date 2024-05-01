@@ -1,0 +1,11 @@
+<div>    
+    <img src="/static/img/coder_square_logo.jpg" style="width: 350px;">
+    <h1>Hola bienvenido al sistema!</h1>
+    <p>Estos son nuestros productos</p>
+
+    {{#each products}}
+        <li class="list-group-item">
+        {{title}} ($ {{price}}) {{description}} {{code}} {{stock}} {{thumbnail}}
+        </li>
+    {{/each}}
+</div>
