@@ -47,6 +47,10 @@
         productsList.appendChild(li);
     });
 
+    socketClient.on('newProduct', (newProduct) => {
+      alert(`Se agregó un nuevo producto: ${newProduct.title}`);
+    });
+
     // Activamos un listener para el submit del formulario,
     // a efectos de enviar la solicitud POST con un fetch
     // y evitar la recarga automática de la página

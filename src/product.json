@@ -34,14 +34,5 @@
     "thumbnail": "remera.jpg",
     "code": 5521,
     "stock": 200
-  },
-  {
-    "id": 6,
-    "title": "Chomba",
-    "price": "3000",
-    "description": "Chomba de lycra",
-    "code": "2222",
-    "stock": "3",
-    "thumbnail": "chomba.jpg"
   }
 ]

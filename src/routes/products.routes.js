@@ -25,6 +25,8 @@ router.post("/", (req, res) => {
   const { title, description, price, thumbnail, code, stock } = req.body;
   const newProduct = productManager.addProduct(req.body);
   res.status(201).json(newProduct);
+  const socketServer = req.app.get("socketServer");
+  socketServer.emit("newProduct", req.body);
 });
 
 router.put("/:pid", (req, res) => {
